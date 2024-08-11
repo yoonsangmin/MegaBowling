@@ -210,6 +210,9 @@ void AMegaBowlingPlayer::PauseGame_Implementation()
 
 void AMegaBowlingPlayer::OnStageStarted()
 {
+	SpawnedBall = nullptr;
+	bIsShot = false;
+
 	bIsPaused = false;
 	SelectedBallIndex = 0;
 	UpdateBallUI();
