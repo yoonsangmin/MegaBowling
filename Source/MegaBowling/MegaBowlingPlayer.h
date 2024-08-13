@@ -76,9 +76,6 @@ protected:
 	TObjectPtr<UInputAction> ResetAction;
 
 	// Game Play
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float PlayerHeight = 32.0f;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsGameStarted = false;
 
@@ -159,6 +156,7 @@ public:
 	void SetIsGameStarted(bool bIsStarted);
 
 private:
+	FTransform InitialTransform;
 	float Power;
 	bool bIsPowerIncreasing;
 	bool bIsShot = false;

@@ -39,7 +39,7 @@ void AMegaBowlingPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerHeight = GetActorLocation().Z;
+	InitialTransform = GetActorTransform();
 	MegaBowlingGameMode = Cast<AMegaBowlingGameMode>(UGameplayStatics::GetActorOfClass(GetWorld(), AMegaBowlingGameMode::StaticClass()));
 }
 
@@ -49,7 +49,7 @@ void AMegaBowlingPlayer::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FVector Location = GetActorLocation();
-	SetActorLocation(FVector(Location.X, Location.Y, PlayerHeight));
+	SetActorLocation(FVector(Location.X, Location.Y, InitialTransform.GetLocation().Z));
 }
 
 void AMegaBowlingPlayer::PositiveMove(const FInputActionValue& Value)
@@ -197,6 +197,9 @@ void AMegaBowlingPlayer::ResetStage()
 {
 	SpawnedBall = nullptr;
 	bIsShot = false;
+
+	SetActorTransform(InitialTransform);
+	GetController()->SetControlRotation(InitialTransform.GetRotation().Rotator());
 
 	MegaBowlingGameMode->ResetStage();
 	UpdateBallUI();
