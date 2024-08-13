@@ -216,6 +216,9 @@ void AMegaBowlingPlayer::OnStageStarted()
 	SpawnedBall = nullptr;
 	bIsShot = false;
 
+	SetActorTransform(InitialTransform);
+	GetController()->SetControlRotation(InitialTransform.GetRotation().Rotator());
+
 	bIsPaused = false;
 	SelectedBallIndex = 0;
 	UpdateBallUI();
