@@ -60,7 +60,11 @@ void AMegaBowlingGameMode::StartStage(int32 StageNumber)
 
 			if (auto ActorClass = ActorInfo.ActorClass.Get())
 			{
-				AActor* SpawnedActor = GetWorld()->SpawnActor(ActorClass, &ActorInfo.Transform);
+				FTransform SpawnTransform = ActorInfo.Transform;
+				SpawnTransform.SetScale3D(FVector::One());
+				AActor* SpawnedActor = GetWorld()->SpawnActor(ActorClass, &SpawnTransform);
+
+				SpawnedActor->SetActorScale3D(ActorInfo.Transform.GetScale3D());
 				SpawnedActor->Tags.Add(FName(TEXT("Spawned")));
 				SpawnedActors.Add(SpawnedActor);
 				
