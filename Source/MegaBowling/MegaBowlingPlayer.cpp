@@ -52,6 +52,12 @@ void AMegaBowlingPlayer::Tick(float DeltaTime)
 	SetActorLocation(FVector(Location.X, Location.Y, InitialTransform.GetLocation().Z));
 }
 
+void AMegaBowlingPlayer::Reload()
+{
+	SpawnedBall = nullptr;
+	bIsShot = false;
+}
+
 void AMegaBowlingPlayer::PositiveMove(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -152,16 +158,18 @@ void AMegaBowlingPlayer::Shoot()
 		return;
 
 	bIsShot = true;
+	bPreviousBallDestroied = false;
 	--OwnedBalls[SelectedBallIndex].BallCount;
 
 	SpawnedBall->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	SpawnedBall->ShootBall(
 		GetActorForwardVector() * Power,
 		[&] {
-			SpawnedBall = nullptr;
-			bIsShot = false;
+			bPreviousBallDestroied = true;
 		});
 	
+	GetWorld()->GetTimerManager().SetTimer(BallReloadHandle, this, &AMegaBowlingPlayer::Reload, BallReloadTime);
+
 	OnShoot();
 }
 

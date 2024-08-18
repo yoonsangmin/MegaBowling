@@ -37,7 +37,7 @@ protected:
 	float DestroyDelay = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float StabilizingSpeed = 25.0f;
+	float StabilizingSpeed = 50.0f;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnShoot();

@@ -107,6 +107,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Shoot")
 	float Guage;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shoot")
+	float BallReloadTime = 2;
+
+	void Reload();
+
 	// Input
 	void PositiveMove(const FInputActionValue& Value);
 	void NegativeMove(const FInputActionValue& Value);
@@ -160,7 +165,9 @@ private:
 	float Power;
 	bool bIsPowerIncreasing;
 	bool bIsShot = false;
+	bool bPreviousBallDestroied = true;
 	TObjectPtr<ABowlingBall> SpawnedBall;
+	FTimerHandle BallReloadHandle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<AMegaBowlingGameMode> MegaBowlingGameMode;
