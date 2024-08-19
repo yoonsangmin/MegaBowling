@@ -3,7 +3,7 @@
 ## 👉Summary
 
 **[Game title :  Mega Bowling]**  
-**[Genre      :  Arcade Puzzle Game]**  
+**[Genre      :  Casual Puzzle Game]**  
 **[Tools      :  Unreal Engine 5.4]**  
 **[Purpose    :  For practicing Unreal Engine]**  
 **[Period     :  July.2024 - Aug.2024]**  
